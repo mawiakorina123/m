@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Spam Calls</title>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'>
+  <link rel="stylesheet" href="./style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Tajawal', sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- partial:index.partial.html -->
+  <a href="http://t.me/toptpt" class="logo" target="_blank">
+    <img src="kareem.png" alt="" style="width: 100px; height: auto;">
+  </a>
+
+  <div class="form-card1">
+    <div class="form-card2">
+      <div class="section">
+        <div class="container">
+          <div class="row full-height justify-content-center">
+            <div class="col-12 text-center align-self-center py-5">
+              <div class="section pb-5 pt-5 pt-sm-2 text-center">
+                <h6 class="mb-0 pb-3"><span>V2.0</span></h6>
+                <h6 class="mb-0 pb-3"><span>تقدر تكلم صاحب الموقع عن طريق تدوس علي اللوجو الي فوق ده KH</span></h6>
+                <h6 class="mb-0 pb-3"><span>الموقع بيرن بارقام مختلفه كتير وضد حظر الارقام او عمل لها بلوك</span></h6>
+                <div class="card-3d-wrap mx-auto">
+                  <div class="card-3d-wrapper">
+                    <div class="card-front">
+                      <div class="center-wrap">
+                        <div class="section text-center">
+                          <h4 class="mb-4 pb-3">سبام مكالمات</h4>
+                          <form class="form" id="callForm">
+                            <div class="form-group">
+                              <select name="country_code" class="form-style" id="countryCode">
+                                <option value="20">🇪🇬مصر (+20)</option>
+                                <option value="966">🇸🇦السعودية (+966)</option>
+                                <option value="967">🇾🇪اليمن (+967)</option>
+                                <option value="212">🇲🇦المغرب (+212)</option>
+                                <option value="964">🇮🇶العراق (+964)</option>
+                                <option value="213">الجزائر🇩🇿 (+213)</option>
+                                <option value="971">🇦🇪الامارات (+971)</option>
+                                <option value="970">فلسطين🇵🇸 (+970)</option>
+                                <option value="963">🇸🇾سوريا (+963)</option>
+                                <option value="90">🇹🇷تركيا (+90)</option>
+                                <option value="7">روسيا🇷🇺 (+7)</option>
+                              </select>
+                            </div>
+                            <div class="form-group mt-2">
+                              <input type="text" name="number" class="form-style" placeholder="حط الرقم هنا" id="phoneNumber" required autocomplete="off">
+                              <i class="input-icon uil uil-phone"></i>
+                              <div class="invalid-feedback">دخل رقم عشان نسبام عليه!!.</div>
+                            </div>
+                            <button type="submit" class="btn mt-4" id="sendButton">Send?</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <!-- partial -->
+  <script>
+    document.getElementById('callForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      var countryCode = document.getElementById('countryCode').value;
+      var phoneNumber = document.getElementById('phoneNumber').value;
+
+      if (phoneNumber.trim() === '') {
+        alert('قم بادخال رقم صحيح.');
+        return;
+      }
+
+      if (!phoneNumber.startsWith(countryCode)) {
+        phoneNumber = countryCode + phoneNumber;
+      }
+
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            alert(xhr.responseText);
+          } else {
+            alert('فيه مشكله حصلت وانا ببعت البيانات للapi حاول تاني او كلم المبرمج');
+          }
+        }
+      };
+
+      var secretToken = 'apispamcallsbytoptpt';
+      xhr.open('GET', 'https://api.elharam.site/callsv1.php?number=' + encodeURIComponent(phoneNumber) + '&country_code=' + encodeURIComponent(countryCode) + '&token=' + secretToken, true);
+      xhr.send();
+    });
+  </script>
+
+</body>
+
+</html>
